@@ -1,0 +1,38 @@
+{% extends 'warmth/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Warmth{% endblock %}
+
+{% block body_block %}
+
+    {% if user.is_authenticated %}
+  <h1>Warmth says... hello {{ user.username }} : {{user.first_name}} : {{user.email}}!</h1>
+  {% else %}
+  <h1>Warmth says... hello world!</h1>
+  {% endif %}
+    <h1>Categories</h1>
+
+    {% if categories %}
+      <ul>
+        {% for category in categories %}
+    <li><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+{% endfor %}
+      </ul>
+    {% else %}
+      <strong> There are no categories present.</strong>
+    {% endif %}
+
+    <h1>Top Pages</h1>
+    {% if pages %}
+      <ul>
+        {% for page in pages %}
+        <li><a href = "{{ page.url }}">{{page.title}}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <strong> There are no Pages present.</strong>
+    {% endif %}
+
+
+  {% endblock %}
